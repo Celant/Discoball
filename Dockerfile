@@ -1,9 +1,19 @@
-FROM node:boron
+FROM node:alpine
 
 # Create app directory
 WORKDIR /discoball
 
+# Install bash for wait-for-it.sh
+RUN apk add --no-cache bash git
+# Install python, make, and gcc for node-gyp
+RUN apk add --no-cache python make g++
+
 # use nodemon for development
+RUN npm install --global nodemon
+# Install node-gyp for C++ packages
+RUN npm install --global node-gyp
+
+# use eslint for development
 RUN npm install --global eslint
 
 # use changes to package.json to force Docker not to use the cache

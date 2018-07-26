@@ -10,7 +10,7 @@ services:
       MYSQL_DATABASE: "discoball"
   bot:
     build: .
-    command: "./docker/wait-for-it.sh db:3306 -- node --debug=5858 index.js"
+    command: "./docker/wait-for-it.sh db:3306 -- nodemon --legacy-watch --watch ./ --inspect=0.0.0.0:9229 index.js"
     depends_on:
       - db
     ports:
